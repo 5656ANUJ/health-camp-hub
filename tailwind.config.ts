@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'poppins': ['Poppins', 'sans-serif'],
+				'open-sans': ['Open Sans', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -43,6 +47,12 @@ export default {
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
 					foreground: 'hsl(var(--accent-foreground))'
+				},
+				healthcare: {
+					primary: 'hsl(var(--healthcare-primary))',
+					secondary: 'hsl(var(--healthcare-secondary))',
+					accent: 'hsl(var(--healthcare-accent))',
+					success: 'hsl(var(--healthcare-success))',
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
