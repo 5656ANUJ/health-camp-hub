@@ -35,9 +35,11 @@ const HeroSection = () => {
                     className="w-full pl-10 pr-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-open-sans"
                   />
                 </div>
-                <Button className="bg-primary hover:bg-primary/90 px-8 py-3 font-open-sans font-semibold">
-                  <Search className="w-5 h-5 mr-2" />
-                  Search Camps
+                <Button className="bg-primary hover:bg-primary/90 px-8 py-3 font-open-sans font-semibold" asChild>
+                  <a href="/find-camps">
+                    <Search className="w-5 h-5 mr-2" />
+                    Search Camps
+                  </a>
                 </Button>
               </div>
             </div>

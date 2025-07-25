@@ -2,49 +2,11 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Calendar, Clock, Users, Shield } from "lucide-react";
+import { useCamps } from "@/contexts/CampsContext";
 
 const CampListings = () => {
-  const camps = [
-    {
-      id: 1,
-      name: "Free Eye Checkup Camp",
-      organizer: "Government Hospital",
-      type: "govt",
-      date: "Tomorrow",
-      time: "9:00 AM - 5:00 PM",
-      location: "Community Center, Sector 15",
-      distance: "2.5 km",
-      services: ["Eye Examination", "Free Glasses", "Cataract Screening"],
-      verified: true,
-      participants: "200+ registered"
-    },
-    {
-      id: 2,
-      name: "General Health Screening",
-      organizer: "Care Foundation NGO",
-      type: "ngo",
-      date: "This Weekend",
-      time: "8:00 AM - 4:00 PM",
-      location: "City Park, Main Road",
-      distance: "4.1 km",
-      services: ["Blood Pressure", "Diabetes Test", "General Consultation"],
-      verified: true,
-      participants: "150+ registered"
-    },
-    {
-      id: 3,
-      name: "Women's Health Camp",
-      organizer: "Metro Hospital",
-      type: "private",
-      date: "Next Monday",
-      time: "10:00 AM - 6:00 PM",
-      location: "Women's Center, Block A",
-      distance: "3.2 km",
-      services: ["Gynecology", "Breast Cancer Screening", "Nutrition Counseling"],
-      verified: true,
-      participants: "100+ registered"
-    }
-  ];
+  const { camps } = useCamps();
+  const displayCamps = camps.slice(0, 3); // Show only first 3 camps on home page
 
   const getOrganizerBadge = (type: string) => {
     switch (type) {
@@ -72,7 +34,7 @@ const CampListings = () => {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {camps.map((camp) => (
+          {displayCamps.map((camp) => (
             <Card key={camp.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="p-6">
                 {/* Header */}
@@ -148,8 +110,8 @@ const CampListings = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="font-open-sans">
-            View All Camps
+          <Button variant="outline" size="lg" className="font-open-sans" asChild>
+            <a href="/find-camps">View All Camps</a>
           </Button>
         </div>
       </div>

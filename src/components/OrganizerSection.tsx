@@ -63,9 +63,11 @@ const OrganizerSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
-                <Plus className="w-5 h-5 mr-2" />
-                List Your Camp
+              <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
+                <a href="/list-camp">
+                  <Plus className="w-5 h-5 mr-2" />
+                  List Your Camp
+                </a>
               </Button>
               <Button variant="outline" size="lg">
                 Learn More

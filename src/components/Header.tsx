@@ -16,10 +16,10 @@ const Header = () => {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="font-open-sans text-foreground hover:text-primary transition-colors">
+            <a href="/find-camps" className="font-open-sans text-foreground hover:text-primary transition-colors">
               Find Camps
             </a>
-            <a href="#" className="font-open-sans text-foreground hover:text-primary transition-colors">
+            <a href="/list-camp" className="font-open-sans text-foreground hover:text-primary transition-colors">
               List Your Camp
             </a>
             <a href="#" className="font-open-sans text-foreground hover:text-primary transition-colors">
@@ -34,8 +34,8 @@ const Header = () => {
             <Button variant="outline" className="font-open-sans">
               Sign In
             </Button>
-            <Button className="font-open-sans bg-primary hover:bg-primary/90">
-              List Your Camp
+            <Button className="font-open-sans bg-primary hover:bg-primary/90" asChild>
+              <a href="/list-camp">List Your Camp</a>
             </Button>
           </div>
 
