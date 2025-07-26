@@ -31,7 +31,7 @@ const ListCamp = () => {
     contactEmail: '',
     contactPhone: '',
     verified: false,
-    participants: '0'
+    participants: ''
   });
 
   const [services, setServices] = useState<string[]>([]);
@@ -57,7 +57,6 @@ const ListCamp = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!formData.name || !formData.organizer || !formData.type || !formData.date || 
         !formData.time || !formData.location || !formData.city || services.length === 0) {
       toast({
@@ -71,11 +70,11 @@ const ListCamp = () => {
     const campData = {
       ...formData,
       services,
-      participants: `${formData.participants}+ expected`
+      participants: formData.participants ? `${formData.participants}+` : '0+'
     };
 
     addCamp(campData);
-    
+
     toast({
       title: "Success!",
       description: "Your health camp has been listed successfully.",

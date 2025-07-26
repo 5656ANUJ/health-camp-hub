@@ -1,121 +1,103 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext } from "react";
 
-export interface Camp {
-  id: string;
-  name: string;
-  organizer: string;
-  type: 'govt' | 'ngo' | 'private';
-  date: string;
-  time: string;
-  location: string;
-  city: string;
-  distance?: string;
-  services: string[];
-  verified: boolean;
-  participants: string;
-  description?: string;
-  contactEmail?: string;
-  contactPhone?: string;
+// Dummy camps for initial load
+const dummyCamps = [
+  {
+    id: 1,
+    name: "Free Eye Checkup Camp",
+    organizer: "Government Hospital",
+    type: "govt",
+    date: "2025-08-10",
+    time: "9:00 AM - 5:00 PM",
+    location: "Community Center, Sector 15",
+    city: "Delhi",
+    description: "Comprehensive eye checkup for all age groups.",
+    contactEmail: "eyecheck@govhospital.com",
+    contactPhone: "+91-9876543210",
+    verified: true,
+    participants: "100+",
+    services: ["Eye Examination", "Spectacles Distribution"],
+    distance: "2 km"
+  },
+  {
+    id: 2,
+    name: "Blood Donation Camp",
+    organizer: "Red Cross NGO",
+    type: "ngo",
+    date: "2025-08-15",
+    time: "10:00 AM - 4:00 PM",
+    location: "Red Cross Bhawan",
+    city: "Mumbai",
+    description: "Donate blood and save lives.",
+    contactEmail: "blooddonation@redcross.org",
+    contactPhone: "+91-9123456789",
+    verified: true,
+    participants: "200+",
+    services: ["Blood Donation", "Free Health Checkup"],
+    distance: "5 km"
+  },
+  {
+    id: 3,
+    name: "Diabetes Screening Camp",
+    organizer: "Private Clinic",
+    type: "private",
+    date: "2025-08-20",
+    time: "8:00 AM - 1:00 PM",
+    location: "Sunrise Clinic, Main Road",
+    city: "Bangalore",
+    description: "Free diabetes screening and consultation.",
+    contactEmail: "info@sunriseclinic.com",
+    contactPhone: "+91-9988776655",
+    verified: false,
+    participants: "50+",
+    services: ["Blood Sugar Test", "Doctor Consultation"],
+    distance: "3 km"
+  }
+];
+
+// Custom hook for localStorage state
+function useLocalStorageState<T>(key: string, defaultValue: T) {
+  const [state, setState] = React.useState<T>(() => {
+    try {
+      const value = localStorage.getItem(key);
+      return value ? JSON.parse(value) : defaultValue;
+    } catch {
+      return defaultValue;
+    }
+  });
+
+  React.useEffect(() => {
+    try {
+      localStorage.setItem(key, JSON.stringify(state));
+    } catch {}
+  }, [key, state]);
+
+  return [state, setState] as const;
 }
 
-interface CampsContextType {
-  camps: Camp[];
-  addCamp: (camp: Omit<Camp, 'id'>) => void;
-  searchCamps: (location: string) => Camp[];
-}
+const CampsContext = createContext<{
+  camps: any[];
+  addCamp: (camp: any) => void;
+}>({
+  camps: [],
+  addCamp: () => {},
+});
 
-const CampsContext = createContext<CampsContextType | undefined>(undefined);
+export const CampsProvider = ({ children }: { children: React.ReactNode }) => {
+  const [camps, setCamps] = useLocalStorageState<any[]>("camps", dummyCamps);
 
-export const CampsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [camps, setCamps] = useState<Camp[]>([]);
-
-  useEffect(() => {
-    // Initialize with dummy data
-    const dummyCamps: Camp[] = [
-      {
-        id: '1',
-        name: 'Free Eye Checkup Camp',
-        organizer: 'Government Hospital',
-        type: 'govt',
-        date: '2024-02-15',
-        time: '9:00 AM - 5:00 PM',
-        location: 'Community Center, Main Street',
-        city: 'Mumbai',
-        distance: '2.5 km',
-        services: ['Eye Checkup', 'Free Medicines', 'Consultation'],
-        verified: true,
-        participants: '200+',
-        description: 'Free comprehensive eye examination for all ages',
-        contactEmail: 'eyecamp@gov.in',
-        contactPhone: '+91-9876543210'
-      },
-      {
-        id: '2',
-        name: 'Diabetes Screening Camp',
-        organizer: 'Health NGO Foundation',
-        type: 'ngo',
-        date: '2024-02-18',
-        time: '8:00 AM - 4:00 PM',
-        location: 'City Hospital, Park Road',
-        city: 'Delhi',
-        distance: '1.2 km',
-        services: ['Blood Sugar Test', 'Diet Consultation', 'Free Medicines'],
-        verified: true,
-        participants: '150+',
-        description: 'Early diabetes detection and awareness program',
-        contactEmail: 'health@ngo.org',
-        contactPhone: '+91-9876543211'
-      },
-      {
-        id: '3',
-        name: 'General Health Checkup',
-        organizer: 'Private Healthcare Ltd',
-        type: 'private',
-        date: '2024-02-20',
-        time: '10:00 AM - 6:00 PM',
-        location: 'Medical Complex, Central Avenue',
-        city: 'Bangalore',
-        distance: '3.1 km',
-        services: ['Blood Pressure', 'BMI Check', 'General Consultation'],
-        verified: false,
-        participants: '100+',
-        description: 'Comprehensive health screening at subsidized rates',
-        contactEmail: 'info@healthcare.com',
-        contactPhone: '+91-9876543212'
-      }
-    ];
-    setCamps(dummyCamps);
-  }, []);
-
-  const addCamp = (newCamp: Omit<Camp, 'id'>) => {
-    const campWithId: Camp = {
-      ...newCamp,
-      id: Date.now().toString(), // Simple ID generation
-      verified: false // New camps start as unverified
-    };
-    setCamps(prev => [campWithId, ...prev]);
-  };
-
-  const searchCamps = (location: string) => {
-    if (!location.trim()) return camps;
-    
-    return camps.filter(camp => 
-      camp.city.toLowerCase().includes(location.toLowerCase()) ||
-      camp.location.toLowerCase().includes(location.toLowerCase())
-    );
+  const addCamp = (camp: any) => {
+    setCamps((prev) => [
+      ...prev,
+      { ...camp, id: Date.now() }
+    ]);
   };
 
   return (
-    <CampsContext.Provider value={{ camps, addCamp, searchCamps }}>
+    <CampsContext.Provider value={{ camps, addCamp }}>
       {children}
     </CampsContext.Provider>
   );
 };
 
-export const useCamps = () => {
-  const context = useContext(CampsContext);
-  if (context === undefined) {
-    throw new Error('useCamps must be used within a CampsProvider');
-  }
-  return context;
-};
+export const useCamps = () => useContext(CampsContext);

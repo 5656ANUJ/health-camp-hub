@@ -7,45 +7,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { MapPin, Calendar, Clock, Users, Shield, Search, Filter } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-type Camp = {
-  _id: string;
-  name: string;
-  organizer: string;
-  type: string;
-  verified?: boolean;
-  date: string;
-  time: string;
-  location: string;
-  distance?: string;
-  participants?: number;
-  services: string[];
-};
+import { useCamps } from "../contexts/CampsContext";
 
 const FindCamps = () => {
-  const [camps, setCamps] = useState<Camp[]>([]);
-  const [filteredCamps, setFilteredCamps] = useState<Camp[]>([]);
+  const { camps } = useCamps();
+  const [filteredCamps, setFilteredCamps] = useState<typeof camps>([]);
   const [searchLocation, setSearchLocation] = useState('');
   const [selectedType, setSelectedType] = useState<string>('all');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/camp') // Adjust the URL/port if needed
-      .then(res => res.json())
-      .then(data => {
-        setCamps(data);
-        setFilteredCamps(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+    // Show all camps by default
+    setFilteredCamps(camps);
+  }, [camps]);
 
   const handleSearch = () => {
     let results = camps;
 
     if (searchLocation.trim() !== '') {
       results = results.filter(camp =>
-        camp.location?.toLowerCase().includes(searchLocation.trim().toLowerCase())
+        camp.location?.toLowerCase().includes(searchLocation.trim().toLowerCase()) ||
+        camp.city?.toLowerCase().includes(searchLocation.trim().toLowerCase())
       );
     }
 
@@ -145,7 +127,7 @@ const FindCamps = () => {
             <>
               <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filteredCamps.map((camp) => (
-                  <Card key={camp._id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <Card key={camp.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                     <div className="p-6">
                       {/* Header */}
                       <div className="flex items-start justify-between mb-4">
