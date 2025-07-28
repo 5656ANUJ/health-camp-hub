@@ -35,26 +35,26 @@ const WorkingProcess = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 lg:gap-8">
           {steps.map((step, index) => {
             const IconComponent = step.icon;
             return (
-              <Card key={index} className="relative p-8 text-center hover:shadow-lg transition-shadow duration-300">
+              <Card key={index} className="relative p-6 sm:p-8 text-center hover:shadow-lg transition-shadow duration-300">
                 {/* Step Number */}
-                <div className="absolute -top-4 left-8 bg-primary text-primary-foreground w-12 h-12 rounded-full flex items-center justify-center font-poppins font-bold text-lg">
+                <div className="absolute -top-3 sm:-top-4 left-4 sm:left-8 bg-primary text-primary-foreground w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-poppins font-bold text-sm sm:text-lg">
                   {step.step}
                 </div>
                 
                 {/* Icon */}
-                <div className="w-16 h-16 bg-primary/10 rounded-full mx-auto mb-6 flex items-center justify-center mt-4">
-                  <IconComponent className="w-8 h-8 text-primary" />
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-full mx-auto mb-4 sm:mb-6 flex items-center justify-center mt-3 sm:mt-4">
+                  <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
                 </div>
 
                 {/* Content */}
-                <h3 className="font-poppins font-semibold text-xl text-foreground mb-4">
+                <h3 className="font-poppins font-semibold text-lg sm:text-xl text-foreground mb-3 sm:mb-4">
                   {step.title}
                 </h3>
-                <p className="font-open-sans text-muted-foreground">
+                <p className="font-open-sans text-sm sm:text-base text-muted-foreground">
                   {step.description}
                 </p>
 

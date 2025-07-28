@@ -25,19 +25,19 @@ const HeroSection = () => {
             </p>
             
             {/* Search Bar */}
-            <div className="bg-card rounded-xl shadow-lg p-6 mb-8">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-1 relative">
+            <div className="bg-card rounded-xl shadow-lg p-4 sm:p-6 mb-8">
+              <div className="flex flex-col gap-4">
+                <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <input
                     type="text"
                     placeholder="Enter your location"
-                    className="w-full pl-10 pr-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-open-sans"
+                    className="w-full pl-10 pr-4 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-open-sans text-sm sm:text-base"
                   />
                 </div>
-                <Button className="bg-primary hover:bg-primary/90 px-8 py-3 font-open-sans font-semibold" asChild>
+                <Button className="bg-primary hover:bg-primary/90 px-6 sm:px-8 py-3 font-open-sans font-semibold w-full sm:w-auto" asChild>
                   <a href="/find-camps">
-                    <Search className="w-5 h-5 mr-2" />
+                    <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     Search Camps
                   </a>
                 </Button>
@@ -45,47 +45,47 @@ const HeroSection = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-3 sm:gap-6">
               <div className="text-center">
-                <div className="font-poppins font-bold text-2xl lg:text-3xl text-primary mb-1">500+</div>
-                <div className="font-open-sans text-sm text-muted-foreground">Camps Listed</div>
+                <div className="font-poppins font-bold text-xl sm:text-2xl lg:text-3xl text-primary mb-1">500+</div>
+                <div className="font-open-sans text-xs sm:text-sm text-muted-foreground">Camps Listed</div>
               </div>
               <div className="text-center">
-                <div className="font-poppins font-bold text-2xl lg:text-3xl text-primary mb-1">1M+</div>
-                <div className="font-open-sans text-sm text-muted-foreground">Patients Served</div>
+                <div className="font-poppins font-bold text-xl sm:text-2xl lg:text-3xl text-primary mb-1">1M+</div>
+                <div className="font-open-sans text-xs sm:text-sm text-muted-foreground">Patients Served</div>
               </div>
               <div className="text-center">
-                <div className="font-poppins font-bold text-2xl lg:text-3xl text-primary mb-1">50+</div>
-                <div className="font-open-sans text-sm text-muted-foreground">Trusted Partners</div>
+                <div className="font-poppins font-bold text-xl sm:text-2xl lg:text-3xl text-primary mb-1">50+</div>
+                <div className="font-open-sans text-xs sm:text-sm text-muted-foreground">Trusted Partners</div>
               </div>
             </div>
           </div>
 
           {/* Right Content - Hero Image */}
-          <div className="relative">
-            <Card className="p-8 bg-gradient-to-br from-primary/5 to-healthcare-accent/5 border-0 shadow-xl">
+          <div className="relative mt-8 lg:mt-0">
+            <Card className="p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-primary/5 to-healthcare-accent/5 border-0 shadow-xl">
               <div className="text-center">
-                <div className="w-32 h-32 bg-primary rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <Calendar className="w-16 h-16 text-primary-foreground" />
+                <div className="w-24 h-24 sm:w-32 sm:h-32 bg-primary rounded-full mx-auto mb-4 sm:mb-6 flex items-center justify-center">
+                  <Calendar className="w-12 h-12 sm:w-16 sm:h-16 text-primary-foreground" />
                 </div>
-                <h3 className="font-poppins font-semibold text-xl text-foreground mb-4">
+                <h3 className="font-poppins font-semibold text-lg sm:text-xl text-foreground mb-4">
                   Next Camp in Your Area
                 </h3>
-                <div className="space-y-3 text-left">
+                <div className="space-y-2 sm:space-y-3 text-left">
                   <div className="flex justify-between">
-                    <span className="font-open-sans text-muted-foreground">Date:</span>
-                    <span className="font-open-sans font-medium">Tomorrow, 9 AM</span>
+                    <span className="font-open-sans text-sm text-muted-foreground">Date:</span>
+                    <span className="font-open-sans text-sm font-medium">Tomorrow, 9 AM</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="font-open-sans text-muted-foreground">Service:</span>
-                    <span className="font-open-sans font-medium">General Checkup</span>
+                    <span className="font-open-sans text-sm text-muted-foreground">Service:</span>
+                    <span className="font-open-sans text-sm font-medium">General Checkup</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="font-open-sans text-muted-foreground">Distance:</span>
-                    <span className="font-open-sans font-medium text-healthcare-success">2.5 km away</span>
+                    <span className="font-open-sans text-sm text-muted-foreground">Distance:</span>
+                    <span className="font-open-sans text-sm font-medium text-healthcare-success">2.5 km away</span>
                   </div>
                 </div>
-                <Button className="w-full mt-6 bg-healthcare-accent hover:bg-healthcare-accent/90">
+                <Button className="w-full mt-4 sm:mt-6 bg-healthcare-accent hover:bg-healthcare-accent/90 text-sm sm:text-base">
                   View Details
                 </Button>
               </div>

@@ -33,10 +33,10 @@ const CampListings = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {displayCamps.map((camp) => (
             <Card key={camp.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
@@ -47,10 +47,10 @@ const CampListings = () => {
                       by {camp.organizer}
                     </p>
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col sm:flex-row lg:flex-col gap-2">
                     {getOrganizerBadge(camp.type)}
                     {camp.verified && (
-                      <Badge className="bg-healthcare-success/10 text-healthcare-success border-healthcare-success/20">
+                      <Badge className="bg-healthcare-success/10 text-healthcare-success border-healthcare-success/20 text-xs">
                         <Shield className="w-3 h-3 mr-1" />
                         Verified
                       </Badge>
