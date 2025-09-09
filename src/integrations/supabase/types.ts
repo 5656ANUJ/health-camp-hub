@@ -14,7 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      camplist: {
+        Row: {
+          camp_name: string[]
+          contact_email: string | null
+          contact_phone: number
+          created_at: string | null
+          expected_participants: number | null
+          id: string
+          organizer_type: string
+          services_offered: string
+          time: string
+          venue_address: string[]
+        }
+        Insert: {
+          camp_name: string[]
+          contact_email?: string | null
+          contact_phone: number
+          created_at?: string | null
+          expected_participants?: number | null
+          id?: string
+          organizer_type: string
+          services_offered: string
+          time: string
+          venue_address: string[]
+        }
+        Update: {
+          camp_name?: string[]
+          contact_email?: string | null
+          contact_phone?: number
+          created_at?: string | null
+          expected_participants?: number | null
+          id?: string
+          organizer_type?: string
+          services_offered?: string
+          time?: string
+          venue_address?: string[]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
